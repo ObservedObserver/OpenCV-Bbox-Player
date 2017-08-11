@@ -25,11 +25,10 @@ player.play()
 bboxSelector is a class to draw bbox on images.
 + <i>window</i> is a opencv window you have created to contain an image.
 > **bboxSelector.rebuild(image)** <br>
-> + <i>image</i> is a numpy array contains rgb info of an image. <br>
-> <br>
-> used to re-initialize the painting board on the image; usually used in video frame operation. <br>
+> + <i>image</i> is a numpy array contains rgb info of an image. 
+> + used to re-initialize the painting board on the image; usually used in video frame operation. 
 > **bboxSelector.finish()** <br>
-> used to end the painting board on the image. Must be used if the board will be used in future.<br>
+> + used to end the painting board on the image. Must be used if the board will be used in future.
 ```
 bboxBoard = bboxSelector(self.windowName)<br>
 bboxBoard.rebuild(frame)<br>
