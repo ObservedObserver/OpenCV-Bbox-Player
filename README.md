@@ -1,7 +1,7 @@
 # OpenCV-Bbox-Player
 ## Usage
 This project is a mini desktop application to play video/usb camera/rtsp. It can easily get screenshot and drawing bbox on the video and get the containing image in the bboxs.
-###Relays###
+### Relays ###
 > Opencv 2.x <br>
 > python 2.7 <br>
 > numpy <br>
