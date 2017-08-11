@@ -18,7 +18,7 @@ ReIDPlayer is a class to create a video player.
 + <i>source</i> can be the video file's path or numbers(such as 0 represent the first camera on your devices) or a rtsp address.
 + <i>windowName</i> is the player's window's title.
 ```
-player = ReIDPlayer("videos/init.mp4","opencvPlayer") <br>
+player = ReIDPlayer("videos/init.mp4","opencvPlayer")
 player.play()
 ```
 **bboxSelector(windowName)**
@@ -31,7 +31,7 @@ bboxSelector is a class to draw bbox on images.
 > **bboxSelector.finish()** <br>
 > + used to end the painting board on the image. Must be used if the board will be used in future.
 ```
-bboxBoard = bboxSelector(self.windowName)<br>
-bboxBoard.rebuild(frame)<br>
+bboxBoard = bboxSelector(self.windowName)
+bboxBoard.rebuild(frame)
 bboxBoard.finish()
 ```
