@@ -15,17 +15,17 @@ When the video is paused, you can directly draw bboxs on the video. And if you p
 ## APIs
 **ReIDPlayer(source, windowName)**
 ReIDPlayer is a class to create a video player.
-+ <i style='color:#800000'>source</i> can be the video file's path or numbers(such as 0 represent the first camera on your devices) or a rtsp address.
-+ windowName is the player's window's title.
++ <i>source</i> can be the video file's path or numbers(such as 0 represent the first camera on your devices) or a rtsp address.
++ <i>windowName</i> is the player's window's title.
 ```
 player = ReIDPlayer("videos/init.mp4","opencvPlayer") <br>
 player.play()
 ```
 **bboxSelector(windowName)**
 bboxSelector is a class to draw bbox on images.
-+ window is a opencv window you have created to contain an image.
++ <i>window</i> is a opencv window you have created to contain an image.
 > **bboxSelector.rebuild(image)**
-> + image is a numpy array contains rgb info of an image.
+> + <i>image</i> is a numpy array contains rgb info of an image.
 > used to re-initialize the painting board on the image; usually used in video frame operation.
 > **bboxSelector.finish()**
 > used to end the painting board on the image. Must be used if the board will be used in future.
