@@ -44,7 +44,7 @@ def rgb2hsv(r, g, b):
 def inverseColor(r, g, b):
     h, s, v = rgb2hsv(r,g,b)
     # h = ((random.random()+0.618)%1)*360
-    h = (h + 180)%360
+    h = (h + 180) % 360
     # h = 360 - h
     s = 0.618
     v = 0.95
@@ -52,9 +52,19 @@ def inverseColor(r, g, b):
 
 def randColor():
     # h, s, v = rgb2hsv(r,g,b)
-    h = ((random.random()+0.618)%1)*360
+    h = ((random.random() + 0.618) % 1) * 360
     # h = (h + 180)%360
     # h = 360 - h
     s = 0.618
     v = 0.95
     return hsv2rgb(h, s, v)
+
+def contrastColor(r, g, b):
+    h,s,v = rgb2hsv(r,g,b)
+    h1 = (h + 120) % 360
+    h2 = (h + 240) % 360
+    s = 0.618
+    v = 0.95
+    r1, g1, b1 = hsv2rgb(h1, s, v)
+    r2, g2, b2 = hsv2rgb(h2, s, v)
+    return r1, g1, b1, r2, g2, b2
