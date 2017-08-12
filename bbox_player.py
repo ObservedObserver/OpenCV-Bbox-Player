@@ -59,9 +59,21 @@ class bboxSelector():
 			# here we use r.g.b inverseColor() to ensure the bbox color can be seen above any background color.
 			b,g,r = np.mean(self.image[self.iy:y, self.ix:x, 0]), np.mean(self.image[self.iy:y, self.ix:x, 1]), np.mean(self.image[self.iy:y, self.ix:x, 2])
 			# print(r,g,b)
-			r,g,b = rc.inverseColor(r,g,b)
-			cv2.rectangle(self.cp_image, (self.ix, self.iy), (x,y), (b,g,r), 2)
-			cv2.rectangle(self.cp_step_image, (self.ix, self.iy), (x,y), (b,g,r), 2)
+			# r,g,b = rc.inverseColor(r,g,b)
+			reid = "ReID:" + str(len(self.stack))
+			r1,g1,b1,r2,g2,b2 = rc.contrastColor(r,g,b)
+			# r1, g1, b1 = rc.inverseColor(r1, g1, b1)
+			# r2, g2, b2 = rc.inverseColor(r2, g2, b2)
+			cv2.rectangle(self.cp_image, (self.ix, self.iy), (x,y), (b2,g2,r2), 2)
+
+			cv2.rectangle(self.cp_image, (self.ix-1, y), (x+1, y + 30), (b2,g2,r2),-1)
+			cv2.putText(self.cp_image[y:(y+30), (self.ix-1):x],reid,(10,26), cv2.FONT_HERSHEY_COMPLEX, 0.72,(b1,g1,r1),2)
+
+			cv2.rectangle(self.cp_step_image, (self.ix, self.iy), (x,y), (b2,g2,r2), 2)
+
+			cv2.rectangle(self.cp_step_image, (self.ix-1, y), (x+1, y + 30), (b2,g2,r2),-1)
+			cv2.putText(self.cp_step_image[y:(y+30), (self.ix-1):x],reid,(10,26), cv2.FONT_HERSHEY_COMPLEX, 0.72,(b1,g1,r1),2)
+
 			self.stack.append([self.ix,self.iy,x,y])
 			self.drawing = False
 
@@ -136,7 +148,7 @@ class ReIDPlayer():
 
 
 def main():
-	
+
 	print("******"*6)
 	print("Press 'q' to quit!")
 	print("When the video is paused, Press:")
