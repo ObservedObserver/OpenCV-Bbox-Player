@@ -73,8 +73,8 @@ class ReIDPlayer():
 	# windowName as the player window's name.
 	def __init__(self, source, windowName):
 		self.video = cv2.VideoCapture(source)
-		self.length = int(self.video.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT))
-		self.fps = self.video.get(cv2.cv.CV_CAP_PROP_FPS)
+		self.length = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
+		self.fps = self.video.get(cv2.CAP_PROP_FPS)
 		# 15 is the time cost of each frame process, it should be auto calculate in future
 		self.wait_time = int(1000/self.fps) - 15
 		self.windowName = windowName
@@ -85,7 +85,10 @@ class ReIDPlayer():
 
 	def _nothing(self, others):
 		pass
-
+	def _close(self):
+		self.video.release()
+		cv2.destroyAllWindows()
+		exit()
 	def play(self):
 		ret, frame = self.video.read()
 		pos = 0
@@ -95,7 +98,7 @@ class ReIDPlayer():
 			v_pos = cv2.getTrackbarPos("Controller",self.windowName)
 			if pos != v_pos:
 				pos = v_pos
-				self.video.set(cv2.cv.CV_CAP_PROP_POS_FRAMES,pos)
+				self.video.set(cv2.CAP_PROP_POS_FRAMES,pos)
 			else:
 				pauseStatus = cv2.getTrackbarPos("Pause",self.windowName)
 				if pauseStatus == 1:
@@ -119,7 +122,9 @@ class ReIDPlayer():
 							print("The frameID is: " + str(v_pos))
 							cv2.imshow("screenshot",frame)
 						elif k == 27:  
-							break  
+							break
+						elif k == ord('q'):
+							self._close()
 
 			cv2.imshow(self.windowName,frame)
 
@@ -127,11 +132,11 @@ class ReIDPlayer():
 				break
 			# time2 = time.time()
 			# print(time2-time1)
-		self.video.release()
-		cv2.destroyAllWindows()
+		self._close()
 
 
 def main():
+	
 	print("******"*6)
 	print("Press 'q' to quit!")
 	print("When the video is paused, Press:")
@@ -139,7 +144,9 @@ def main():
 	print("Press 's' to get all the bbox image.")
 	print("Press 'c' to get try to fix the bugs you might meet!")
 	print("******"*6)
-	player = ReIDPlayer("init.mp4","ReID")
+
+
+	player = ReIDPlayer("img&video/init.mp4","ReID")
 	player.play()
 
 if __name__ =="__main__":
