@@ -60,8 +60,18 @@ class bboxSelector():
 			b,g,r = np.mean(self.image[self.iy:y, self.ix:x, 0]), np.mean(self.image[self.iy:y, self.ix:x, 1]), np.mean(self.image[self.iy:y, self.ix:x, 2])
 			# print(r,g,b)
 			r,g,b = rc.inverseColor(r,g,b)
+			reid = "ReID:" + str(int(random.random()*20)+10)
+			reid_color = rc.inverseColor(b,g,r)
 			cv2.rectangle(self.cp_image, (self.ix, self.iy), (x,y), (b,g,r), 2)
+
+			cv2.rectangle(self.cp_image, (self.ix-1, y), (x+1, y + 30), (b,g,r),-1)
+			cv2.putText(self.cp_image[y:(y+30), (self.ix-1):x],reid,(10,26), cv2.FONT_HERSHEY_COMPLEX, 0.72,reid_color,2)
+
 			cv2.rectangle(self.cp_step_image, (self.ix, self.iy), (x,y), (b,g,r), 2)
+
+			cv2.rectangle(self.cp_step_image, (self.ix-1, y), (x+1, y + 30), (b,g,r),-1)
+			cv2.putText(self.cp_step_image[y:(y+30), (self.ix-1):x],reid,(10,26), cv2.FONT_HERSHEY_COMPLEX, 0.72,reid_color,2)
+
 			self.stack.append([self.ix,self.iy,x,y])
 			self.drawing = False
 
@@ -136,7 +146,7 @@ class ReIDPlayer():
 
 
 def main():
-	
+
 	print("******"*6)
 	print("Press 'q' to quit!")
 	print("When the video is paused, Press:")
